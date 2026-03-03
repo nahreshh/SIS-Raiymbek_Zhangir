@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Асарет — {{ dish.name }}{% endblock %}
+
+{% block content %}
+<article class="detail">
+  <a class="link" href="{% url 'menu_list' %}">← Артқа</a>
+  <h1>{{ dish.name }}</h1>
+  {% if dish.image %}
+    <img class="detail-img" src="{{ dish.image.url }}" alt="{{ dish.name }}">
+  {% endif %}
+  <p>{{ dish.description }}</p>
+  <p class="price big">{{ dish.price }} ₸</p>
+  {% if dish.is_signature %}
+    <p class="badge">Шеф ұсынысы</p>
+  {% endif %}
+</article>
+{% endblock %}

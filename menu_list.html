@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Асарет — Мәзір{% endblock %}
+
+{% block content %}
+<h1>Мәзір</h1>
+<div class="grid">
+  {% for d in dishes %}
+    <article class="card">
+      {% if d.image %}
+        <img src="{{ d.image.url }}" alt="{{ d.name }}">
+      {% else %}
+        <div class="noimg">Сурет жоқ</div>
+      {% endif %}
+      <h3>{{ d.name }}</h3>
+      <p class="muted">{{ d.description|truncatechars:90 }}</p>
+      <div class="row">
+        <span class="price">{{ d.price }} ₸</span>
+        {% if d.is_signature %}
+          <span class="badge">Шеф ұсынысы</span>
+        {% endif %}
+        <a class="link" href="{% url 'menu_detail' d.pk %}">Толығырақ</a>
+      </div>
+    </article>
+  {% empty %}
+    <p>Әзірге мәзір бос. Admin арқылы тағам енгіз.</p>
+  {% endfor %}
+</div>
+{% endblock %}

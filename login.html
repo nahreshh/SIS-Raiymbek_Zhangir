@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Кіру — Асарет{% endblock %}
+
+{% block content %}
+<h1>Кіру</h1>
+<form method="post" class="form auth-form">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn primary" type="submit">Кіру</button>
+</form>
+{% endblock %}

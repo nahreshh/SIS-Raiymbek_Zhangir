@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}АСАРЕТ — француз мейрамханасы{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="logo" href="{% url 'home' %}">Асарет</a>
+
+    <nav class="menu">
+      <a href="{% url 'menu_list' %}">Мәзір</a>
+      <a href="#contact">Байланыс</a>
+    </nav>
+
+    <div class="auth">
+      {% if user.is_authenticated %}
+        <span class="hello">Сәлем, <b>{{ user.username }}</b>!</span>
+        <a class="btn" href="{% url 'logout' %}">Шығу</a>
+      {% else %}
+        <a class="btn" href="{% url 'login' %}">Кіру</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container footer-inner">
+    <p>© Асарет — французкий ресторан</p>
+    <p>Алматы қ., +7 (776) 759-82-84</p>
+  </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

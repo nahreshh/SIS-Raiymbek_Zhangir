@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Асарет — Басты бет{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1 class="fade-in">АСАРЕТ — француз мейрамханасы</h1>
+  <p>Француз асханасының нәзік дәмі, жылы атмосфера.</p>
+  <a class="btn primary" href="{% url 'menu_list' %}">Мәзірді көру</a>
+</section>
+
+<section class="cards">
+  <h2>Шефтің таңдауы</h2>
+  <div class="grid">
+    {% for d in signature %}
+      <article class="card">
+        {% if d.image %}
+          <img src="{{ d.image.url }}" alt="{{ d.name }}">
+        {% endif %}
+        <h3>{{ d.name }}</h3>
+        <p class="muted">{{ d.description|truncatechars:80 }}</p>
+        <div class="row">
+          <span class="price">{{ d.price }} ₸</span>
+          <a class="link" href="{% url 'menu_detail' d.pk %}">Толығырақ</a>
+        </div>
+      </article>
+    {% empty %}
+      <p>Әзірге ұсыныстар жоқ. Admin арқылы тағам қос.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="reserve">
+  <h2>Үстел брондау</h2>
+  <form id="reserveForm" class="form">
+    <label>Аты-жөні
+      <input type="text" id="name" placeholder="Мысалы: Айдана">
+    </label>
+    <label>Телефон
+      <input type="text" id="phone" placeholder="+7...">
+    </label>
+    <button class="btn primary" type="submit">Жіберу</button>
+    <p id="formMsg" class="msg"></p>
+  </form>
+</section>
+{% endblock %}
